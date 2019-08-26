@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food_ordering/constants/colors.dart';
+import 'package:flutter_food_ordering/constants/values.dart';
 import 'package:flutter_food_ordering/model/cart_model.dart';
 import 'package:flutter_food_ordering/model/food_model.dart';
 import 'package:flutter_food_ordering/widgets/cart_bottom_sheet.dart';
@@ -16,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   showCart() {
     showModalBottomSheet(
-      shape: roundedRectangle32,
+      shape: roundedRectangle40,
       context: context,
       builder: (context) => CartBottomSheet(),
     );
@@ -31,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             buildAppBar(),
             buildFoodFilter(),
+            Divider(),
             buildFoodList(),
           ],
         ),

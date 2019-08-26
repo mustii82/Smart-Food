@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food_ordering/constants/colors.dart';
+import 'package:flutter_food_ordering/constants/values.dart';
 import 'package:flutter_food_ordering/main.dart';
 import 'package:flutter_food_ordering/model/cart_model.dart';
 import 'package:flutter_food_ordering/model/food_model.dart';
@@ -32,7 +32,7 @@ class _FoodCardState extends State<FoodCard> {
 
   Widget buildImage() {
     return Card(
-      shape: roundedRectangle,
+      shape: roundedRectangle12,
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(12)),
         child: Image.network(
@@ -108,11 +108,12 @@ class _FoodCardState extends State<FoodCard> {
           ),
           Card(
             margin: EdgeInsets.only(right: 8),
-            shape: roundedRectangle,
+            shape: roundedRectangle4,
             color: mainColor,
             child: InkWell(
               onTap: addItemToCard,
-              customBorder: roundedRectangle,
+              splashColor: Colors.white70,
+              customBorder: roundedRectangle4,
               child: Icon(Icons.add),
             ),
           )

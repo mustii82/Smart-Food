@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food_ordering/constants/colors.dart';
+import 'package:flutter_food_ordering/constants/values.dart';
 import 'package:flutter_food_ordering/model/cart_model.dart';
 import 'package:flutter_food_ordering/model/food_model.dart';
 import 'package:flutter_food_ordering/pages/checkout_page.dart';
@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class CartBottomSheet extends StatelessWidget {
   final titleStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
   final titleStyle1 = TextStyle(fontSize: 16);
-  final titleStyle2 = TextStyle(fontSize: 18, color: Colors.black45);
+  final titleStyle2 = TextStyle(fontSize: 16, color: Colors.black45);
   final titleStyle4 = TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
 
   @override
@@ -94,9 +94,9 @@ class CartBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('No items in cart!!', style: titleStyle2),
+            Text('You don\'t have any order yet!!', style: titleStyle2),
             SizedBox(height: 16),
-            Icon(Icons.remove_shopping_cart, size: 64),
+            Icon(Icons.remove_shopping_cart, size: 40),
           ],
         ),
       ),
