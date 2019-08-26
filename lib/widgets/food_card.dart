@@ -13,61 +13,68 @@ class FoodCard extends StatefulWidget {
   _FoodCardState createState() => _FoodCardState();
 }
 
-class _FoodCardState extends State<FoodCard> {
+class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin {
   Food get food => widget.food;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          buildImage(),
-          buildTitle(),
-          buildRating(),
-          buildPriceInfo(),
-        ],
+      child: Card(
+        shape: roundedRectangle12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            buildImage(),
+            buildTitle(),
+            buildRating(),
+            buildPriceInfo(),
+          ],
+        ),
       ),
     );
   }
 
   Widget buildImage() {
-    return Card(
-      shape: roundedRectangle12,
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        child: Image.network(
-          food.image,
-          fit: BoxFit.fill,
-          height: 100,
-          loadingBuilder: (context, Widget child, ImageChunkEvent progress) {
-            if (progress == null) return child;
-            return Padding(
-                padding: EdgeInsets.all(32),
-                child: CircularProgressIndicator(
-                  value: progress.expectedTotalBytes != null ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes : null,
-                ));
-          },
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+      child: Image.network(
+        food.image,
+        fit: BoxFit.fill,
+        height: MediaQuery.of(context).size.height / 6,
+        loadingBuilder: (context, Widget child, ImageChunkEvent progress) {
+          if (progress == null) return child;
+          return Center(
+            child: Padding(
+              padding: EdgeInsets.all(32),
+              child: CircularProgressIndicator(value: progress.expectedTotalBytes != null ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes : null),
+            ),
+          );
+        },
       ),
     );
   }
 
   Widget buildTitle() {
     return Container(
-      height: 60,
-      padding: const EdgeInsets.only(top: 12.0, left: 8, right: 16),
+      padding: const EdgeInsets.only(left: 8, right: 8),
       child: Text(
         food.name,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        style: titleStyle,
       ),
     );
   }
 
   Widget buildRating() {
     return Padding(
-      padding: const EdgeInsets.only(top: 12.0, left: 4, right: 16),
+      padding: const EdgeInsets.only(left: 4, right: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,10 +87,7 @@ class _FoodCardState extends State<FoodCard> {
             unratedColor: Colors.black,
             itemPadding: EdgeInsets.only(right: 4.0),
             ignoreGestures: true,
-            itemBuilder: (context, _) => Icon(
-              Icons.star,
-              color: mainColor,
-            ),
+            itemBuilder: (context, index) => Icon(Icons.star, color: mainColor),
             onRatingUpdate: (rating) {},
           ),
           Text('(${food.rateCount})'),
@@ -94,20 +98,17 @@ class _FoodCardState extends State<FoodCard> {
 
   Widget buildPriceInfo() {
     return Padding(
-      padding: const EdgeInsets.only(top: 12.0, left: 8, right: 8),
+      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
             '\$ ${food.price}',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: titleStyle,
           ),
           Card(
-            margin: EdgeInsets.only(right: 8),
+            margin: EdgeInsets.only(right: 0),
             shape: roundedRectangle4,
             color: mainColor,
             child: InkWell(
@@ -125,10 +126,9 @@ class _FoodCardState extends State<FoodCard> {
   addItemToCard() {
     final snackBar = SnackBar(
       content: Text('${food.name} added to cart'),
-      duration: Duration(milliseconds: 100),
+      duration: Duration(milliseconds: 500),
     );
     Scaffold.of(context).showSnackBar(snackBar);
-    CartModel cartModel = CartModel(food: food, quantity: 1);
-    Provider.of<Cart>(context).addItem(cartModel);
+    Provider.of<MyCart>(context).addItem(CartItem(food: food, quantity: 1));
   }
 }

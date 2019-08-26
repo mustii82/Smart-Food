@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_ordering/model/food_model.dart';
 
-class Cart extends ChangeNotifier {
-  List<CartModel> items = [];
-  List<CartModel> get cartItems => items;
+class MyCart extends ChangeNotifier {
+  List<CartItem> items = [];
+  List<CartItem> get cartItems => items;
 
-  void addItem(CartModel cartModel) {
-    for (CartModel cart in cartItems) {
-      if (cartModel.food.name == cart.food.name) {
+  void addItem(CartItem cartItem) {
+    for (CartItem cart in cartItems) {
+      if (cartItem.food.name == cart.food.name) {
         cartItems[cartItems.indexOf(cart)].quantity++;
         notifyListeners();
         return;
       }
     }
-    items.add(cartModel);
+    items.add(cartItem);
     notifyListeners();
   }
 
@@ -22,7 +22,7 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  void decreaseItem(CartModel cartModel) {
+  void decreaseItem(CartItem cartModel) {
     if (cartItems[cartItems.indexOf(cartModel)].quantity <= 1) {
       return;
     }
@@ -30,7 +30,7 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  void increaseItem(CartModel cartModel) {
+  void increaseItem(CartItem cartModel) {
     cartItems[cartItems.indexOf(cartModel)].quantity++;
     notifyListeners();
   }
@@ -43,9 +43,9 @@ class Cart extends ChangeNotifier {
   }
 }
 
-class CartModel {
+class CartItem {
   Food food;
   int quantity;
 
-  CartModel({this.food, this.quantity});
+  CartItem({this.food, this.quantity});
 }

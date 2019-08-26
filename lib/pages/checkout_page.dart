@@ -11,7 +11,6 @@ class CheckOutPage extends StatefulWidget {
 }
 
 class _CheckOutPageState extends State<CheckOutPage> {
-  var headerStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
   var now = DateTime.now();
   get weekDay => DateFormat('EEEE').format(now);
   get day => DateFormat('dd').format(now);
@@ -20,7 +19,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    var cart = Provider.of<Cart>(context);
+    var cart = Provider.of<MyCart>(context);
     return Scaffold(
       body: SingleChildScrollView(
         controller: scrollController,
@@ -85,28 +84,26 @@ class _CheckOutPageState extends State<CheckOutPage> {
     ];
   }
 
-  Widget buildPriceInfo(Cart cart) {
-    final titleStyle2 = TextStyle(fontSize: 18, color: Colors.black45);
+  Widget buildPriceInfo(MyCart cart) {
     double total = 0;
-    for (CartModel cart in cart.cartItems) {
+    for (CartItem cart in cart.cartItems) {
       total += cart.food.price * cart.quantity;
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('Total:', style: titleStyle2),
+        Text('Total:', style: headerStyle),
         Text('\$ ${total.toStringAsFixed(2)}', style: headerStyle),
       ],
     );
   }
 
-  Widget checkoutButton(Cart cart, context) {
-    final titleStyle1 = TextStyle(fontSize: 16);
+  Widget checkoutButton(MyCart cart, context) {
     return Container(
       margin: EdgeInsets.only(top: 24, bottom: 64),
       width: double.infinity,
       child: RaisedButton(
-        child: Text('Checkout', style: titleStyle1),
+        child: Text('Checkout', style: titleStyle),
         onPressed: () {
           cart.clearCart();
           Navigator.of(context).pop();
@@ -118,89 +115,86 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  Widget buildCartItemList(Cart cart, CartModel cartModel) {
-    var titleStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
-    var titleStyleRed = TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.redAccent);
-    return Container(
+  Widget buildCartItemList(MyCart cart, CartItem cartModel) {
+    return Card(
       margin: EdgeInsets.only(bottom: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Flexible(
-            flex: 3,
-            fit: FlexFit.tight,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Image.network(cartModel.food.image),
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Flexible(
+              flex: 3,
+              fit: FlexFit.tight,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: Image.network(cartModel.food.image),
+              ),
             ),
-          ),
-          Flexible(
-            flex: 5,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  child: Text(
-                    cartModel.food.name,
-                    style: titleStyle,
-                    textAlign: TextAlign.center,
+            Flexible(
+              flex: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    height: 45,
+                    child: Text(
+                      cartModel.food.name,
+                      style: subtitleStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    InkWell(
-                      customBorder: roundedRectangle4,
-                      onTap: () => cart.decreaseItem(cartModel),
-                      child: Icon(Icons.remove_circle),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text('${cartModel.quantity}', style: titleStyle),
-                    ),
-                    InkWell(
-                      customBorder: roundedRectangle4,
-                      onTap: () => cart.increaseItem(cartModel),
-                      child: Icon(Icons.add_circle),
-                    ),
-                  ],
-                )
-              ],
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      InkWell(
+                        customBorder: roundedRectangle4,
+                        onTap: () => cart.decreaseItem(cartModel),
+                        child: Icon(Icons.remove_circle),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
+                        child: Text('${cartModel.quantity}', style: titleStyle),
+                      ),
+                      InkWell(
+                        customBorder: roundedRectangle4,
+                        onTap: () => cart.increaseItem(cartModel),
+                        child: Icon(Icons.add_circle),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-          Flexible(
-            flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  height: 40,
-                  width: 70,
-                  child: Text(
-                    '\$ ${cartModel.food.price}',
-                    style: titleStyleRed,
-                    textAlign: TextAlign.end,
+            Flexible(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    height: 45,
+                    width: 70,
+                    child: Text(
+                      '\$ ${cartModel.food.price}',
+                      style: titleStyle,
+                      textAlign: TextAlign.end,
+                    ),
                   ),
-                ),
-                Card(
-                  shape: roundedRectangle12,
-                  color: Colors.red,
-                  child: InkWell(
+                  InkWell(
                     onTap: () => cart.removeAllInCart(cartModel.food),
                     customBorder: roundedRectangle12,
-                    child: Icon(Icons.close, color: Colors.white),
-                  ),
-                )
-              ],
+                    child: Icon(Icons.delete_sweep, color: Colors.red),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

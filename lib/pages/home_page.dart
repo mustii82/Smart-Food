@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
           children: <Widget>[
             buildAppBar(),
@@ -41,13 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildAppBar() {
     int items = 0;
-    Provider.of<Cart>(context).cartItems.forEach((cart) {
+    Provider.of<MyCart>(context).cartItems.forEach((cart) {
       items += cart.quantity;
     });
     return SafeArea(
       child: Row(
         children: <Widget>[
-          Text('MENU', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          Text('MENU', style: headerStyle),
           Spacer(),
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
           Stack(
@@ -101,18 +101,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildFoodList() {
     return Expanded(
-      child: GridView.builder(
-        itemCount: foods.length,
+      child: GridView.count(
+        //itemCount: foods.length,
+        childAspectRatio: 0.65,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        crossAxisCount: 2,
         physics: BouncingScrollPhysics(),
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 4 / 6,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 16,
-        ),
-        itemBuilder: (context, index) {
-          return FoodCard(foods[index]);
-        },
+        children: foods.map((food) {
+          return FoodCard(food);
+        }).toList(),
       ),
     );
   }

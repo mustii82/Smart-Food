@@ -6,19 +6,10 @@ import 'package:flutter_food_ordering/pages/checkout_page.dart';
 import 'package:provider/provider.dart';
 
 class CartBottomSheet extends StatelessWidget {
-  final titleStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
-  final titleStyle1 = TextStyle(fontSize: 16);
-  final titleStyle2 = TextStyle(fontSize: 16, color: Colors.black45);
-  final titleStyle4 = TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
-
   @override
   Widget build(BuildContext context) {
-    Cart cart = Provider.of<Cart>(context);
-    // return DraggableScrollableSheet(
-    //   initialChildSize: 1,
-    //   maxChildSize: 1,
-    //   minChildSize: 0.5,
-    //   builder: (context, scrollController) {
+    MyCart cart = Provider.of<MyCart>(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
@@ -31,12 +22,16 @@ class CartBottomSheet extends StatelessWidget {
             child: Container(
               width: 90,
               height: 8,
-              decoration: ShapeDecoration(shape: StadiumBorder(), color: Colors.black26),
+              decoration: ShapeDecoration(
+                  shape: StadiumBorder(), color: Colors.black26),
             ),
           ),
           buildTitle(cart),
           Divider(),
-          if (cart.cartItems.length <= 0) noItemWidget() else buildItemsList(cart),
+          if (cart.cartItems.length <= 0)
+            noItemWidget()
+          else
+            buildItemsList(cart),
           Divider(),
           buildPriceInfo(cart),
           SizedBox(height: 8),
@@ -51,14 +46,12 @@ class CartBottomSheet extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text(
-          'Your Order',
-          style: titleStyle,
-        ),
+        Text('Your Order', style: headerStyle),
         RaisedButton.icon(
           icon: Icon(Icons.delete_forever),
           color: Colors.red,
           shape: StadiumBorder(),
+          splashColor: Colors.white60,
           onPressed: cart.clearCart,
           textColor: Colors.white,
           label: Text('Clear'),
@@ -67,7 +60,7 @@ class CartBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget buildItemsList(Cart cart) {
+  Widget buildItemsList(MyCart cart) {
     return Expanded(
       child: ListView.builder(
         itemCount: cart.cartItems.length,
@@ -75,10 +68,14 @@ class CartBottomSheet extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              leading: CircleAvatar(backgroundImage: NetworkImage(cart.cartItems[index].food.image)),
-              title: Text('${cart.cartItems[index].food.name}', style: titleStyle4),
+              leading: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(cart.cartItems[index].food.image)),
+              title: Text('${cart.cartItems[index].food.name}',
+                  style: subtitleStyle),
               subtitle: Text('\$ ${cart.cartItems[index].food.price}'),
-              trailing: Text('x ${cart.cartItems[index].quantity}', style: titleStyle4),
+              trailing: Text('x ${cart.cartItems[index].quantity}',
+                  style: subtitleStyle),
             ),
           );
         },
@@ -103,16 +100,16 @@ class CartBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget buildPriceInfo(Cart cart) {
+  Widget buildPriceInfo(MyCart cart) {
     double total = 0;
-    for (CartModel cartModel in cart.cartItems) {
+    for (CartItem cartModel in cart.cartItems) {
       total += cartModel.food.price * cartModel.quantity;
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('Total:', style: titleStyle2),
-        Text('\$ ${total.toStringAsFixed(2)}', style: titleStyle),
+        Text('Total:', style: headerStyle),
+        Text('\$ ${total.toStringAsFixed(2)}', style: headerStyle),
       ],
     );
   }
@@ -120,12 +117,13 @@ class CartBottomSheet extends StatelessWidget {
   Widget addToCardButton(cart, context) {
     return Center(
       child: RaisedButton(
-        child: Text('Add to Cart', style: titleStyle1),
+        child: Text('Add to Cart', style: titleStyle),
         onPressed: cart.cartItems.length == 0
             ? null
             : () {
                 Navigator.of(context).pop();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CheckOutPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CheckOutPage()));
               },
         padding: EdgeInsets.symmetric(horizontal: 64, vertical: 12),
         color: mainColor,
