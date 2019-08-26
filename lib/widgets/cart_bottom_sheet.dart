@@ -55,7 +55,14 @@ class CartBottomSheet extends StatelessWidget {
           'Your Order',
           style: titleStyle,
         ),
-        IconButton(icon: Icon(Icons.delete), onPressed: cart.clearCart)
+        RaisedButton.icon(
+          icon: Icon(Icons.delete_forever),
+          color: Colors.red,
+          shape: StadiumBorder(),
+          onPressed: cart.clearCart,
+          textColor: Colors.white,
+          label: Text('Clear'),
+        ),
       ],
     );
   }
@@ -71,7 +78,7 @@ class CartBottomSheet extends StatelessWidget {
               leading: CircleAvatar(backgroundImage: NetworkImage(cart.cartItems[index].food.image)),
               title: Text('${cart.cartItems[index].food.name}', style: titleStyle4),
               subtitle: Text('\$ ${cart.cartItems[index].food.price}'),
-              trailing: Text('x ${cart.cartItems[index].quantity}'),
+              trailing: Text('x ${cart.cartItems[index].quantity}', style: titleStyle4),
             ),
           );
         },

@@ -88,14 +88,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
     final titleStyle1 = TextStyle(fontSize: 16);
     return Container(
       margin: EdgeInsets.only(top: 16, bottom: 64),
-      child: Center(
-        child: RaisedButton(
-          child: Text('Checkout', style: titleStyle1),
-          onPressed: () {},
-          padding: EdgeInsets.symmetric(horizontal: 64, vertical: 12),
-          color: mainColor,
-          shape: StadiumBorder(),
-        ),
+      width: double.infinity,
+      child: RaisedButton(
+        child: Text('Checkout', style: titleStyle1),
+        onPressed: () {},
+        padding: EdgeInsets.symmetric(horizontal: 64, vertical: 12),
+        color: mainColor,
+        shape: StadiumBorder(),
       ),
     );
   }
