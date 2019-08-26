@@ -17,13 +17,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
   get day => DateFormat('dd').format(now);
   get month => DateFormat('MMMM').format(now);
 
-  List<Food> displayList = [];
-
   ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<Cart>(context);
-    displayList.clear();
     return Scaffold(
       body: SingleChildScrollView(
         controller: scrollController,
@@ -37,18 +34,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               SafeArea(
                 child: InkWell(onTap: () => Navigator.of(context).pop(), child: Icon(Icons.arrow_back_ios)),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Cart', style: titleStyle),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 0),
-                child: Text('$weekDay, ${day}th of $month ', style: titleStyle),
-              ),
-              FlatButton(
-                child: Text('+ Add to order'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
+              ...buildHeader(),
               ListView.builder(
                 itemCount: cart.cartItems.length,
                 shrinkWrap: true,
@@ -64,6 +50,23 @@ class _CheckOutPageState extends State<CheckOutPage> {
         ),
       ),
     );
+  }
+
+  List<Widget> buildHeader() {
+    return [
+      Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Text('Cart', style: titleStyle),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 0),
+        child: Text('$weekDay, ${day}th of $month ', style: titleStyle),
+      ),
+      FlatButton(
+        child: Text('+ Add to order'),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
+    ];
   }
 
   Widget buildPriceInfo(Cart cart) {
@@ -133,7 +136,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     InkWell(
-                      onTap: () => cart.removeItem(cartModel),
+                      onTap: () => cart.decreaseItem(cartModel),
                       child: Icon(Icons.remove_circle),
                     ),
                     Padding(
@@ -168,7 +171,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   shape: roundedRectangle,
                   color: mainColor,
                   child: InkWell(
-                    onTap: () => cart.removeAllInList(cartModel.food),
+                    onTap: () => cart.removeAllInCart(cartModel.food),
                     customBorder: roundedRectangle,
                     child: Icon(Icons.close),
                   ),

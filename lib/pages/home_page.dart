@@ -12,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int value = 0;
+  int value = 1;
 
   showCart() {
     showModalBottomSheet(
@@ -78,13 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
-        children: List.generate(foodTypes.length, (index) {
+        children: List.generate(FoodTypes.values.length, (index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ChoiceChip(
               selectedColor: mainColor,
               labelStyle: TextStyle(color: value == index ? Colors.white : Colors.black),
-              label: Text(foodTypes[index]),
+              label: Text(FoodTypes.values[index].toString().split('.').last),
               selected: value == index,
               onSelected: (selected) {
                 setState(() {

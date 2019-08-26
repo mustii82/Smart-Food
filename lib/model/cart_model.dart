@@ -22,7 +22,7 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItem(CartModel cartModel) {
+  void decreaseItem(CartModel cartModel) {
     if (cartItems[cartItems.indexOf(cartModel)].quantity <= 1) {
       return;
     }
@@ -35,7 +35,7 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeAllInList(Food food) {
+  void removeAllInCart(Food food) {
     cartItems.removeWhere((f) {
       return f.food.name == food.name;
     });
