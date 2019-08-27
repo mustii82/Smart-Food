@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_food_ordering/constants/values.dart';
@@ -10,13 +12,28 @@ class CheckOutPage extends StatefulWidget {
   _CheckOutPageState createState() => _CheckOutPageState();
 }
 
-class _CheckOutPageState extends State<CheckOutPage> {
+class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderStateMixin {
   var now = DateTime.now();
   get weekDay => DateFormat('EEEE').format(now);
   get day => DateFormat('dd').format(now);
   get month => DateFormat('MMMM').format(now);
+  double oldTotal = 0;
+  double total = 0;
 
   ScrollController scrollController = ScrollController();
+  AnimationController animationController;
+  @override
+  void initState() {
+    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 200))..forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<MyCart>(context);
@@ -85,15 +102,22 @@ class _CheckOutPageState extends State<CheckOutPage> {
   }
 
   Widget buildPriceInfo(MyCart cart) {
-    double total = 0;
+    oldTotal = total;
+    total = 0;
     for (CartItem cart in cart.cartItems) {
       total += cart.food.price * cart.quantity;
     }
+    //oldTotal = total;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text('Total:', style: headerStyle),
-        Text('\$ ${total.toStringAsFixed(2)}', style: headerStyle),
+        AnimatedBuilder(
+          animation: animationController,
+          builder: (context, child) {
+            return Text('\$ ${lerpDouble(oldTotal, total, animationController.value).toStringAsFixed(2)}', style: headerStyle);
+          },
+        ),
       ],
     );
   }
@@ -153,7 +177,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     children: <Widget>[
                       InkWell(
                         customBorder: roundedRectangle4,
-                        onTap: () => cart.decreaseItem(cartModel),
+                        onTap: () {
+                          cart.decreaseItem(cartModel);
+                          animationController.reset();
+                          animationController.forward();
+                        },
                         child: Icon(Icons.remove_circle),
                       ),
                       Padding(
@@ -162,7 +190,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       ),
                       InkWell(
                         customBorder: roundedRectangle4,
-                        onTap: () => cart.increaseItem(cartModel),
+                        onTap: () {
+                          cart.increaseItem(cartModel);
+                          animationController.reset();
+                          animationController.forward();
+                        },
                         child: Icon(Icons.add_circle),
                       ),
                     ],
@@ -186,7 +218,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () => cart.removeAllInCart(cartModel.food),
+                    onTap: () {
+                      cart.removeAllInCart(cartModel.food);
+                      animationController.reset();
+                      animationController.forward();
+                    },
                     customBorder: roundedRectangle12,
                     child: Icon(Icons.delete_sweep, color: Colors.red),
                   )
