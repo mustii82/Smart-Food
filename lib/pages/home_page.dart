@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
               selected: value == index,
               onSelected: (selected) {
                 setState(() {
-                  value = selected ? index : null;
+                  value = index;
                 });
               },
             ),
