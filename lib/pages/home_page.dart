@@ -58,7 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   alignment: Alignment.center,
                   padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: mainColor),
+                  decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: mainColor),
                   child: Text(
                     '$items',
                     style: TextStyle(fontSize: 12, color: Colors.black),
@@ -84,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: ChoiceChip(
               selectedColor: mainColor,
-              labelStyle: TextStyle(color: value == index ? Colors.white : Colors.black),
+              labelStyle: TextStyle(
+                  color: value == index ? Colors.white : Colors.black),
               label: Text(FoodTypes.values[index].toString().split('.').last),
               selected: value == index,
               onSelected: (selected) {
