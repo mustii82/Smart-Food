@@ -22,16 +22,12 @@ class CartBottomSheet extends StatelessWidget {
             child: Container(
               width: 90,
               height: 8,
-              decoration: ShapeDecoration(
-                  shape: StadiumBorder(), color: Colors.black26),
+              decoration: ShapeDecoration(shape: StadiumBorder(), color: Colors.black26),
             ),
           ),
           buildTitle(cart),
           Divider(),
-          if (cart.cartItems.length <= 0)
-            noItemWidget()
-          else
-            buildItemsList(cart),
+          if (cart.cartItems.length <= 0) noItemWidget() else buildItemsList(cart),
           Divider(),
           buildPriceInfo(cart),
           SizedBox(height: 8),
@@ -68,14 +64,10 @@ class CartBottomSheet extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              leading: CircleAvatar(
-                  backgroundImage:
-                      NetworkImage(cart.cartItems[index].food.image)),
-              title: Text('${cart.cartItems[index].food.name}',
-                  style: subtitleStyle),
+              leading: CircleAvatar(backgroundImage: NetworkImage(cart.cartItems[index].food.image)),
+              title: Text('${cart.cartItems[index].food.name}', style: subtitleStyle),
               subtitle: Text('\$ ${cart.cartItems[index].food.price}'),
-              trailing: Text('x ${cart.cartItems[index].quantity}',
-                  style: subtitleStyle),
+              trailing: Text('x ${cart.cartItems[index].quantity}', style: subtitleStyle),
             ),
           );
         },
@@ -117,13 +109,12 @@ class CartBottomSheet extends StatelessWidget {
   Widget addToCardButton(cart, context) {
     return Center(
       child: RaisedButton(
-        child: Text('Add to Cart', style: titleStyle),
+        child: Text('CheckOut', style: titleStyle),
         onPressed: cart.cartItems.length == 0
             ? null
             : () {
                 Navigator.of(context).pop();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CheckOutPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CheckOutPage()));
               },
         padding: EdgeInsets.symmetric(horizontal: 64, vertical: 12),
         color: mainColor,
