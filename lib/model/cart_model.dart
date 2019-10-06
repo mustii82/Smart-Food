@@ -13,6 +13,7 @@ class MyCart extends ChangeNotifier {
         return;
       }
     }
+    
     items.add(cartItem);
     notifyListeners();
   }
