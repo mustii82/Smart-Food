@@ -12,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int value = 1;
+  int value = 0;
 
   showCart() {
     showModalBottomSheet(

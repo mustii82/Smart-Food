@@ -9,8 +9,8 @@ class Food {
 }
 
 enum FoodTypes {
-  Salad,
   All,
+  Salad,
   Pizza,
   Asian,
   Burger,
