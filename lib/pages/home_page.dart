@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Row(
         children: <Widget>[
-          Text('MENU', style: headerStyle),
+          Text('SmartFood', style: headerStyle),
           Spacer(),
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
           Stack(
