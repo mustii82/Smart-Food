@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_ordering/animations/fade_animation.dart';
+import 'package:flutter_food_ordering/constants/values.dart';
 import 'package:flutter_food_ordering/pages/home_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -96,7 +97,7 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
                       child: MaterialButton(
                         onPressed: () => _onTap(),
                         minWidth: double.infinity,
-                        child: Text("Start", style: TextStyle(color: Colors.white),),
+                        child: Text("Start", style: font1Style),
                       ),
                     )
                   )),
@@ -107,7 +108,7 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
                   opacity: _textVisible ? 1.0 : 0.0,
                   duration: Duration(milliseconds: 50),
                   child: Align(
-                    child: Text("Now Deliver To Your Door 24/7", style: TextStyle(color: Colors.white70, fontSize: 15),),
+                    child: Text("Now Deliver To Your Door 24/7", style: TextStyle(color: Colors.white70, fontSize: 18),),
                   ),
                 )),
                 SizedBox(height: 30,),
