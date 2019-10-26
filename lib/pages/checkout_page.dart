@@ -88,14 +88,14 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
       ),
       Padding(
         padding: const EdgeInsets.only(top: 24.0),
-        child: Text('Cart', style: headerStyle),
+        child: Text('Warenkorb', style: headerStyle),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 0),
         child: Text('$weekDay, ${day}th of $month ', style: headerStyle),
       ),
       FlatButton(
-        child: Text('+ Add to order', style: titleStyle2,),
+        child: Text('+ zur Bestellung hinzufügen', style: titleStyle2,),
         onPressed: () => Navigator.of(context).pop(),
       ),
     ];
@@ -111,7 +111,7 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('Total:', style: headerStyle),
+        Text('Gesamt:', style: headerStyle),
         AnimatedBuilder(
           animation: animationController,
           builder: (context, child) {
@@ -127,7 +127,7 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
       margin: EdgeInsets.only(top: 24, bottom: 64),
       width: double.infinity,
       child: RaisedButton(
-        child: Text('Checkout', style: titleStyle),
+        child: Text('Zur Kasse', style: titleStyle),
         onPressed: () {
           cart.clearCart();
           Navigator.of(context).pop();

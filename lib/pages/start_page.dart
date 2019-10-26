@@ -74,9 +74,9 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                FadeAnimation(.5, Text('Taking Order For Faster Delivery', style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),)),
+                FadeAnimation(.5, Text('Auftragsannahme für schnellere Lieferung', style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),)),
                 SizedBox(height: 20,),
-                FadeAnimation(1, Text("See resturants nearby by \nadding location", style: TextStyle(color: Colors.white, height: 1.4, fontSize: 18),)),
+                FadeAnimation(1, Text("Siehe Restaurants in der Nähe von \nHinzufügen einer Position", style: TextStyle(color: Colors.white, height: 1.4, fontSize: 18),)),
                 SizedBox(height: 100,),
                 FadeAnimation(1.2, 
                 ScaleTransition(
@@ -108,7 +108,7 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
                   opacity: _textVisible ? 1.0 : 0.0,
                   duration: Duration(milliseconds: 50),
                   child: Align(
-                    child: Text("Now Deliver To Your Door 24/7", style: TextStyle(color: Colors.white70, fontSize: 18),),
+                    child: Text("Jetzt 24/7 an Ihre Tür liefern", style: TextStyle(color: Colors.white70, fontSize: 18),),
                   ),
                 )),
                 SizedBox(height: 30,),
