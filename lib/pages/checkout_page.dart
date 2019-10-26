@@ -95,7 +95,7 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
         child: Text('$weekDay, ${day}th of $month ', style: headerStyle),
       ),
       FlatButton(
-        child: Text('+ Add to order'),
+        child: Text('+ Add to order', style: titleStyle2,),
         onPressed: () => Navigator.of(context).pop(),
       ),
     ];
@@ -115,7 +115,7 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
         AnimatedBuilder(
           animation: animationController,
           builder: (context, child) {
-            return Text('\$ ${lerpDouble(oldTotal, total, animationController.value).toStringAsFixed(2)}', style: headerStyle);
+            return Text('${lerpDouble(oldTotal, total, animationController.value).toStringAsFixed(2)} €', style: headerStyle);
           },
         ),
       ],
@@ -212,7 +212,7 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
                     height: 45,
                     width: 70,
                     child: Text(
-                      '\$ ${cartModel.food.price}',
+                      '${cartModel.food.price} €',
                       style: titleStyle,
                       textAlign: TextAlign.end,
                     ),

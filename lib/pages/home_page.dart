@@ -12,13 +12,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int value = 1;
+  int value = 0;
 
   showCart() {
     showModalBottomSheet(
       shape: roundedRectangle40,
       context: context,
-      builder: (context) => CartBottomSheet(),
+      builder: (context) => CartBottomSheet()
     );
   }
 
@@ -58,11 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 right: 0,
                 child: Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(4),
+                  padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(shape: BoxShape.circle, color: mainColor),
                   child: Text(
                     '$items',
-                    style: TextStyle(fontSize: 12, color: Colors.black),
+                    style: TextStyle(fontSize: 15, color: Colors.black),
                   ),
                 ),
               ),
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: ChoiceChip(
               selectedColor: mainColor,
-              labelStyle: TextStyle(color: value == index ? Colors.white : Colors.black),
+              labelStyle: TextStyle(color: value == index ? Colors.white : Colors.black,fontSize: 18, fontWeight: FontWeight.w500),
               label: Text(FoodTypes.values[index].toString().split('.').last),
               selected: value == index,
               onSelected: (selected) {

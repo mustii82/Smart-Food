@@ -83,7 +83,7 @@ class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin
             initialRating: food.rate,
             direction: Axis.horizontal,
             itemCount: 5,
-            itemSize: 14,
+            itemSize: 18,
             unratedColor: Colors.black,
             itemPadding: EdgeInsets.only(right: 4.0),
             ignoreGestures: true,
@@ -104,7 +104,7 @@ class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
-            '\$ ${food.price}',
+            '\ ${food.price}'+' €',
             style: titleStyle,
           ),
           Card(
@@ -125,8 +125,9 @@ class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin
 
   addItemToCard() {
     final snackBar = SnackBar(
-      content: Text('${food.name} added to cart'),
-      duration: Duration(milliseconds: 500),
+      content: Text('${food.name} added to cart',style: font1Style.copyWith(fontSize: 18),),
+      duration: Duration(milliseconds: 1500),
+      backgroundColor: mainColor
     );
     Scaffold.of(context).showSnackBar(snackBar);
     Provider.of<MyCart>(context).addItem(CartItem(food: food, quantity: 1));

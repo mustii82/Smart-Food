@@ -66,7 +66,7 @@ class CartBottomSheet extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(backgroundImage: NetworkImage(cart.cartItems[index].food.image)),
               title: Text('${cart.cartItems[index].food.name}', style: subtitleStyle),
-              subtitle: Text('\$ ${cart.cartItems[index].food.price}'),
+              subtitle: Text('${cart.cartItems[index].food.price} €'),
               trailing: Text('x ${cart.cartItems[index].quantity}', style: subtitleStyle),
             ),
           );
@@ -101,7 +101,7 @@ class CartBottomSheet extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text('Total:', style: headerStyle),
-        Text('\$ ${total.toStringAsFixed(2)}', style: headerStyle),
+        Text('${total.toStringAsFixed(2)} €', style: headerStyle),
       ],
     );
   }
