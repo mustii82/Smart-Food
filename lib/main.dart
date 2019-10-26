@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_ordering/model/cart_model.dart';
-import 'package:flutter_food_ordering/pages/home_page.dart';
+import 'package:flutter_food_ordering/pages/start_page.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(),
+        home: StarterPage(),
       ),
     );
   }
