@@ -19,15 +19,15 @@ enum FoodTypes {
 
 List<Food> foods = [
   Food(
-    name: 'Vegetable and Poached Egg',
-    price: 15,
+    name: 'Gemüse und pochiertes Ei',
+    price: 15.75,
     rate: 3.0,
     rateCount: 15,
     image: 'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2014/05/Poached-egg-and-bacon-salad-recipe-920x605.jpg',
     foodType: FoodTypes.Salad,
   ),
   Food(
-    name: 'Avocado Salad With Mayonoise Soy Sauce',
+    name: 'Avocadosalat mit Mayonoise Sojasauce',
     price: 12.49,
     rate: 2,
     rateCount: 25,
@@ -35,15 +35,15 @@ List<Food> foods = [
     foodType: FoodTypes.Salad,
   ),
   Food(
-    name: 'Pancake With Orange Sauce',
+    name: 'Pfannkuchen mit Orangensauce',
     price: 9.99,
     rate: 3,
     rateCount: 67,
-    image: 'https://iowagirleats.com/wp-content/uploads/2013/01/OrangePancakes_02_mini.jpg',
+    image: 'kenan/Downloads/Bilder für smart food app/Pfannkuchen.jpg',
     foodType: FoodTypes.Salad,
   ),
   Food(
-    name: 'Vegetables Salad',
+    name: 'Gemüsesalat',
     price: 7.49,
     rate: 4,
     rateCount: 29,
@@ -51,7 +51,7 @@ List<Food> foods = [
     foodType: FoodTypes.Salad,
   ),
   Food(
-    name: 'Pineapple Pizza',
+    name: 'Ananas-Pizza',
     price: 22.99,
     rate: 5,
     rateCount: 102,
