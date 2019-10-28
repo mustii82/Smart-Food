@@ -90,10 +90,10 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
         padding: const EdgeInsets.only(top: 24.0),
         child: Text('Warenkorb', style: headerStyle),
       ),
-      Padding(
+     /* Padding(
         padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 0),
         child: Text('$weekDay, ${day}th of $month ', style: headerStyle),
-      ),
+      ),*/
       FlatButton(
         child: Text('+ zur Bestellung hinzufügen', style: titleStyle2,),
         onPressed: () => Navigator.of(context).pop(),
@@ -127,7 +127,7 @@ class _CheckOutPageState extends State<CheckOutPage> with SingleTickerProviderSt
       margin: EdgeInsets.only(top: 24, bottom: 64),
       width: double.infinity,
       child: RaisedButton(
-        child: Text('Zur Kasse', style: titleStyle),
+        child: Text('Bezahlen', style: titleStyle),
         onPressed: () {
           cart.clearCart();
           Navigator.of(context).pop();
