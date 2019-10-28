@@ -42,7 +42,7 @@ class CartBottomSheet extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('Your Order', style: headerStyle),
+        Text('Deine Bestellungen', style: headerStyle),
         RaisedButton.icon(
           icon: Icon(Icons.delete_forever),
           color: Colors.red,
@@ -50,7 +50,7 @@ class CartBottomSheet extends StatelessWidget {
           splashColor: Colors.white60,
           onPressed: cart.clearCart,
           textColor: Colors.white,
-          label: Text('Clear'),
+          label: Text('Leeren'),
         ),
       ],
     );
@@ -100,7 +100,7 @@ class CartBottomSheet extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('Total:', style: headerStyle),
+        Text('Gesamt:', style: headerStyle),
         Text('${total.toStringAsFixed(2)} €', style: headerStyle),
       ],
     );
@@ -109,7 +109,7 @@ class CartBottomSheet extends StatelessWidget {
   Widget addToCardButton(cart, context) {
     return Center(
       child: RaisedButton(
-        child: Text('CheckOut', style: titleStyle),
+        child: Text('Weiter', style: titleStyle),
         onPressed: cart.cartItems.length == 0
             ? null
             : () {

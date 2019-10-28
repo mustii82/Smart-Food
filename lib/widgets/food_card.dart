@@ -87,7 +87,7 @@ class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin
             unratedColor: Colors.black,
             itemPadding: EdgeInsets.only(right: 4.0),
             ignoreGestures: true,
-            itemBuilder: (context, index) => Icon(Icons.star, color: mainColor),
+            itemBuilder: (context, index) => Icon(Icons.star, color: Colors.amber),
             onRatingUpdate: (rating) {},
           ),
           Text('(${food.rateCount})'),
@@ -115,7 +115,7 @@ class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin
               onTap: addItemToCard,
               splashColor: Colors.white70,
               customBorder: roundedRectangle4,
-              child: Icon(Icons.add),
+              child: Icon(Icons.add,color: Colors.white,),
             ),
           )
         ],
@@ -125,7 +125,7 @@ class _FoodCardState extends State<FoodCard> with SingleTickerProviderStateMixin
 
   addItemToCard() {
     final snackBar = SnackBar(
-      content: Text('${food.name} added to cart',style: font1Style.copyWith(fontSize: 18),),
+      content: Text('${food.name} added to cart',style: TextStyle(fontSize: 16 ,color: Colors.black,inherit: false)),
       duration: Duration(milliseconds: 1500),
       backgroundColor: mainColor
     );

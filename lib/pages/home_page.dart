@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Row(
         children: <Widget>[
-          Text('SmartFood', style: headerStyle),
+          Text('Smart Food', style: headerStyle),
           Spacer(),
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
           Stack(
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildFoodFilter() {
     return Container(
-      height: 50,
+      height: 55,
       //color: Colors.red,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -85,8 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: ChoiceChip(
               selectedColor: mainColor,
-              labelStyle: TextStyle(color: value == index ? Colors.white : Colors.black,fontSize: 18, fontWeight: FontWeight.w500),
-              label: Text(FoodTypes.values[index].toString().split('.').last),
+              label: Text(FoodTypes.values[index].toString().split('.').last, style: TextStyle(color: value == index ? Colors.white : Colors.black)),
               selected: value == index,
               onSelected: (selected) {
                 setState(() {

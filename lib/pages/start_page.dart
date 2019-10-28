@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_ordering/animations/fade_animation.dart';
 import 'package:flutter_food_ordering/constants/values.dart';
+import 'package:flutter_food_ordering/constants/values.dart';
 import 'package:flutter_food_ordering/pages/home_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -74,9 +75,9 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                FadeAnimation(.5, Text('Auftragsannahme für schnellere Lieferung', style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),)),
+                FadeAnimation(.5, Text('Smarte und schnellere Lieferung', style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),)),
                 SizedBox(height: 20,),
-                FadeAnimation(1, Text("Siehe Restaurants in der Nähe von \nHinzufügen einer Position", style: TextStyle(color: Colors.white, height: 1.4, fontSize: 18),)),
+                FadeAnimation(1, Text("Das Liefererlebnis des 20. Jahrhunderts", style: TextStyle(color: Colors.white, height: 1.4, fontSize: 18),)),
                 SizedBox(height: 100,),
                 FadeAnimation(1.2, 
                 ScaleTransition(
@@ -86,8 +87,8 @@ class _StarterPageState extends State<StarterPage> with TickerProviderStateMixin
                       borderRadius: BorderRadius.circular(10),
                       gradient: LinearGradient(
                         colors: [
-                          Colors.yellow,
-                          Colors.orange
+                          mainColor,
+                          mainColor
                         ]
                       )
                     ),
