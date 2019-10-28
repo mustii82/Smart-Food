@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //color
-Color mainColor = Color.fromRGBO(255, 204, 0, 1);
+Color mainColor = Color(0xff52de97);
 
 //Style
 final headerStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
